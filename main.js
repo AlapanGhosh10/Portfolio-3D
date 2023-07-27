@@ -58,23 +58,27 @@ function addStar() {
 
 Array(200).fill().forEach(addStar);
 
+import imgUrl from '/static/images/alan.png'
+import bgUrl from '/static/images/space.jpg'
+import moonUrl from '/static/images/moon.jpg'
+import norUrl from '/static/images/normal.jpg'
+
 // Background
 
-const spaceTexture = new THREE.TextureLoader().load('/static/images/space.jpg');
+const spaceTexture = new THREE.TextureLoader().load(bgUrl);
 scene.background = spaceTexture;
 
 // Avatar
+const alanTexture = new THREE.TextureLoader().load(imgUrl);
 
-const jeffTexture = new THREE.TextureLoader().load('/static/images/alan.png');
+const alan = new THREE.Mesh(new THREE.BoxGeometry(3, 3, 3), new THREE.MeshBasicMaterial({ map: alanTexture }));
 
-const jeff = new THREE.Mesh(new THREE.BoxGeometry(3, 3, 3), new THREE.MeshBasicMaterial({ map: jeffTexture }));
-
-scene.add(jeff);
+scene.add(alan);
 
 // Moon
 
-const moonTexture = new THREE.TextureLoader().load('/static/images/moon.jpg');
-const normalTexture = new THREE.TextureLoader().load('/static/images/normal.jpg');
+const moonTexture = new THREE.TextureLoader().load(moonUrl);
+const normalTexture = new THREE.TextureLoader().load(norUrl);
 
 const moon = new THREE.Mesh(
   new THREE.SphereGeometry(3, 32, 32),
@@ -89,8 +93,8 @@ scene.add(moon);
 moon.position.z = 30;
 moon.position.setX(-10);
 
-jeff.position.z = -5;
-jeff.position.x = 2;
+alan.position.z = -5;
+alan.position.x = 2;
 
 // Scroll Animation
 
@@ -100,8 +104,8 @@ function moveCamera() {
   moon.rotation.y += 0.075;
   moon.rotation.z += 0.05;
 
-  jeff.rotation.y += 0.01;
-  jeff.rotation.z += 0.01;
+  alan.rotation.y += 0.01;
+  alan.rotation.z += 0.01;
 
   camera.position.z = t * -0.01;
   camera.position.x = t * -0.0002;
